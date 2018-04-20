@@ -1,4 +1,7 @@
 from django.urls import path
+from django.conf.urls import url
+from rest_framework.urlpatterns import format_suffix_patterns
+from ecommerce import views
 
 from . import views
 
@@ -16,4 +19,12 @@ urlpatterns = [
     path('getproduct/<int:cartid>/<int:productid>', views.getProduct, name='getProduct'),
     path('updateproduct/<int:cartid>/<int:productid>/<int:productprice>', views.updateProduct, name='updateProduct'),
     path('addproduct/<int:cartid>/<str:productname>+<int:productprice>+<str:productdesc>', views.addProduct, name='addProduct'),
+    url(r'^users/$', views.UserList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    url(r'^users/$', views.CartList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.CartDetail.as_view()),
+    url(r'^users/$', views.ProductList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view()),
 ]
+
+urlpatterns = for_suffix_patterns(urlpatterns)
